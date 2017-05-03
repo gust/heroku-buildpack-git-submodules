@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+export BUILD_DIR=$1
+
+if [ ! -f "$BUILD_DIR/.gitmodules" ]; then
+  echo "---> No .gitmodules file found. Skipping."
+  exit 0
+fi
+
+echo '-----> Initializing and updating submodules'
+
+cd $(dirname $0)/..
+unset GIT_DIR
+git submodule update --init --recursive
